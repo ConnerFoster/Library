@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Library</title>
+</head>
+<body>
+    <header>
+        <h1>Library</h1>
+        <i class="fa-brands fa-github"></i>
+    </header>
+
+    <main>
+        <div class="addButton">
+            <button class="addbook">+ Add Book</button>
+        </div>
+
+        <div class="booksContainer">
+
+        </div>
+        
+    </main>
+
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h1>Add Book</h1>
+            <div class="form-fields">
+                <input type="text" id="title" name="title" placeholder="Title" required><br>
+                <input type="text" id="author" name="author" placeholder="Author" required><br>
+                <input type="text" id="pages" name="pages" placeholder="Page Count" required><br>
+                <label for="read">Have you read it?</label>
+                <input type="checkbox" id="read" name="read" placeholder="Read?" required><br>
+                <button class="sub">Submit</button>
+            </div>
+            
+        </div>
+    </div>
+
+
+    
+    <script src="https://kit.fontawesome.com/263d4f855d.js" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+    
+</body>
+</html>
