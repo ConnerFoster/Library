@@ -1,5 +1,7 @@
+//Array holding Book objects
 let bookArray = [];
 
+//Book constructor
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -7,6 +9,7 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+//Prototype Functions
 Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${
     this.pages
@@ -33,6 +36,7 @@ const bookCtr = document.querySelector(".booksContainer");
 let titleIn, authorIn, pagesIn, readIn;
 let removeButtons, i;
 
+//Trigger Modal Form
 addBookBtn.addEventListener("click", toggleModal);
 closeModalBtn.addEventListener("click", toggleModal);
 
@@ -40,6 +44,13 @@ function toggleModal() {
   modal.classList.toggle("show-modal");
 }
 
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    toggleModal();
+  }
+});
+
+//Create book with form info when submitted
 submitBtn.addEventListener("click", (e) => {
   titleIn = titleBox.value;
   authorIn = authorBox.value;
@@ -60,6 +71,7 @@ submitBtn.addEventListener("click", (e) => {
   }
 });
 
+//Render books onto the page
 function displayBooks() {
   clearContainer(bookCtr);
   bookArray.forEach((book, index) => {
@@ -95,6 +107,7 @@ function displayBooks() {
     removeBtn.classList.add("remove");
     removeBtn.addEventListener("click", () => {
       bookArray.splice(index, 1);
+      store();
       displayBooks();
     });
     removeBtn.setAttribute("bookIndex", index);
@@ -106,23 +119,25 @@ function displayBooks() {
   });
 }
 
+//Clear div holding books
 function clearContainer(node) {
   while (node.firstChild) {
     node.removeChild(node.firstChild);
   }
 }
 
+//Local Storage setup and retrieval
 function store() {
   localStorage.setItem("arr", JSON.stringify(bookArray));
 }
 
 window.addEventListener("load", () => {
   if (localStorage.getItem("arr") != null) {
-    bookArray = JSON.parse(localStorage.getItem("arr"));
-    for (item of bookArray) {
-      Object.assign(Book.prototype, item);
+    let temp = JSON.parse(localStorage.getItem("arr"));
+    for (item of temp) {
+      let book = new Book(item.title, item.author, item.pages, item.read);
+      bookArray.push(book);
     }
-    console.log(bookArray);
     displayBooks();
   }
 });
